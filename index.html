@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>صالون الفخامة — حجز المواعيد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container bar">
+      <a class="logo" href="index.html">
+        <div class="logo-box"><i class="fa-solid fa-scissors"></i></div>
+        <div class="brand"><h1 id="brandName"></h1><p data-i18n="tagline"></p></div>
+      </a>
+      <div class="pills">
+        <button class="pill" id="langBtn" type="button"></button>
+        <a class="pill" href="login.html"><i class="fa-solid fa-store"></i> <span data-i18n="staffLogin"></span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main">
+    <!-- لافتة + عدادات الانتظار المباشرة -->
+    <section class="glass-gold banner fade">
+      <div class="txt">
+        <div class="live-badge"><span class="dot"></span><span data-i18n="liveNow"></span></div>
+        <h2 data-i18n="heroTitle"></h2>
+        <p data-i18n="heroSub"></p>
+      </div>
+      <div class="counter">
+        <div><b class="gold" id="waitCount">0</b><span data-i18n="inQueue"></span></div>
+        <div class="sep"></div>
+        <div><b id="estWait" style="color:#34d399">—</b><span data-i18n="expWait"></span></div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <div class="stack">
+        <!-- كل خيارات الحجز ظاهرة من البداية -->
+        <div id="bookingFlow" class="stack">
+          <section class="glass-card step" id="step1">
+            <div class="step-head"><span class="step-num">1</span><span data-i18n="step1"></span></div>
+            <div class="grid" id="barbers"></div>
+          </section>
+
+          <section class="glass-card step" id="step2">
+            <div class="step-head"><span class="step-num">2</span><span data-i18n="step2"></span></div>
+            <div class="grid svc" id="services"></div>
+          </section>
+
+          <form class="glass-card step" id="bookForm" novalidate>
+            <div class="step-head"><span class="step-num">3</span><span data-i18n="step3"></span></div>
+            <div class="form-grid">
+              <div class="field"><label for="custName" data-i18n="fullName"></label>
+                <input id="custName" maxlength="60" autocomplete="name" data-i18n-ph="namePh"></div>
+              <div class="field"><label for="custPhone" data-i18n="phone"></label>
+                <input id="custPhone" type="tel" maxlength="20" autocomplete="tel" inputmode="tel" dir="ltr" data-i18n-ph="phonePh"></div>
+            </div>
+
+            <label data-i18n="bookingKind"></label>
+            <div class="kinds">
+              <button type="button" class="kind on" id="kindScheduled"><i class="fa-regular fa-clock"></i> <span data-i18n="kindScheduled"></span></button>
+              <button type="button" class="kind" id="kindWalkin"><i class="fa-solid fa-chair"></i> <span data-i18n="kindWalkin"></span></button>
+            </div>
+
+            <div id="scheduledBox">
+              <div class="field" style="max-width:260px"><label for="date" data-i18n="date"></label><input type="date" id="date"></div>
+              <label data-i18n="timesTitle"></label>
+              <p class="muted xs hidden" id="pickHint" data-i18n="pickBarberFirst"></p>
+              <div class="slots" id="slots"></div>
+              <div class="legend">
+                <span><i style="background:#1f2937;border:1px solid #374151"></i><span data-i18n="legendFree"></span></span>
+                <span><i style="background:rgba(244,63,94,.4)"></i><span data-i18n="legendBooked"></span></span>
+                <span><i style="background:#111827"></i><span data-i18n="legendPast"></span></span>
+              </div>
+            </div>
+
+            <div id="walkinBox" class="hidden">
+              <div class="info"><p data-i18n="walkinInfo"></p>
+                <p style="margin-top:6px"><span data-i18n="walkinWait"></span>: <b class="gold" id="walkinWait">—</b></p></div>
+            </div>
+            <div class="err" id="formErr" role="alert"></div>
+          </form>
+
+          <section class="glass-card sumbar">
+            <div>
+              <span class="muted xs" data-i18n="total"></span>
+              <div class="price" id="totalPrice">0</div>
+              <span class="muted xs"><span data-i18n="estDuration"></span>: <span id="totalTime">0</span></span>
+            </div>
+            <button class="btn lg" type="submit" form="bookForm" id="submitBtn"></button>
+          </section>
+        </div>
+
+        <!-- تأكيد الحجز + اقتراح واتساب (بعد اكتمال الحجز في الموقع) -->
+        <section id="secDone" class="glass-gold center hidden fade">
+          <h2 id="doneTitle" style="font-size:1.4rem;font-weight:800"></h2>
+          <p class="muted" data-i18n="doneSub"></p>
+          <div class="summary" id="doneSummary"></div>
+          <div class="wa-box">
+            <b data-i18n="waSuggestTitle"></b>
+            <span class="muted xs" data-i18n="waSuggestSub"></span>
+            <a id="waBtn" class="btn wa block" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="sendWhatsapp"></span></a>
+          </div>
+          <button id="newBtn" type="button" class="btn ghost block" style="margin-top:14px" data-i18n="newBooking"></button>
+        </section>
+      </div>
+
+      <aside class="stack">
+        <section class="glass-card">
+          <div class="side-title"><span><i class="fa-solid fa-list-ol"></i><span data-i18n="queueBoard"></span></span><span class="tag" data-i18n="liveUpdate"></span></div>
+          <div class="scroll" id="queueBoard"></div>
+        </section>
+        <section class="glass-card" style="border-color:rgba(16,185,129,.3)">
+          <div class="side-title" style="color:#34d399"><span><i class="fa-solid fa-ticket" style="color:#34d399"></i><span data-i18n="myBookings"></span></span></div>
+          <div id="myBookings"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="customer.js"></script>
+</body>
+</html>

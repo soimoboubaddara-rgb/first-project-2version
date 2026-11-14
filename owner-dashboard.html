@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>لوحة مول المحل — صالون الفخامة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container bar">
+      <a class="logo" href="index.html">
+        <div class="logo-box"><i class="fa-solid fa-crown"></i></div>
+        <div class="brand"><h1 id="brandName"></h1><p data-i18n="ownerTitle"></p></div>
+      </a>
+      <div class="pills">
+        <span class="who" id="who"></span>
+        <button class="pill" id="langBtn" type="button"></button>
+        <button class="pill" id="logoutBtn" type="button"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="logout"></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main">
+    <div class="stats" id="stats"></div>
+
+    <!-- إدارة الكراسي وحالة الحلاقين -->
+    <section class="stack">
+      <div class="row between wrap">
+        <h2 class="sec"><i class="fa-solid fa-scissors"></i><span data-i18n="chairsTitle"></span></h2>
+        <span class="muted xs" data-i18n="chairsHint"></span>
+      </div>
+      <div class="chairs" id="chairs"></div>
+    </section>
+
+    <!-- مواعيد اليوم كاملة + طابور الانتظار -->
+    <div class="cols2">
+      <section class="glass-card">
+        <div class="panel-head"><h3><i class="fa-regular fa-calendar-days"></i><span data-i18n="todayTitle"></span></h3><span class="tag" id="todayCount"></span></div>
+        <div id="todayList"></div>
+      </section>
+      <section class="glass-card">
+        <div class="panel-head"><h3><i class="fa-solid fa-users" style="color:#60a5fa"></i><span data-i18n="queueTitle"></span></h3>
+          <button type="button" class="btn sm" data-act="walkin"><i class="fa-solid fa-plus"></i> <span data-i18n="addWalkin"></span></button></div>
+        <div class="scroll" id="queueList"></div>
+      </section>
+    </div>
+
+    <!-- فريق العمل -->
+    <section class="glass-card">
+      <div class="panel-head"><h3><i class="fa-solid fa-user-group"></i><span data-i18n="team"></span></h3></div>
+      <form id="barberForm" class="form-grid" novalidate>
+        <div><label for="bName" data-i18n="barberName"></label><input id="bName" maxlength="40"></div>
+        <div><label for="bUser" data-i18n="barberUser"></label><input id="bUser" maxlength="20" autocapitalize="none" autocomplete="off" dir="ltr"></div>
+        <div><label for="bPass" data-i18n="barberPass"></label><input id="bPass" maxlength="40" autocomplete="off" dir="ltr"></div>
+        <button class="btn" type="submit"><i class="fa-solid fa-user-plus"></i> <span data-i18n="addBarber"></span></button>
+      </form>
+      <div class="err" id="barberErr" role="alert"></div>
+      <div id="teamTable"></div>
+    </section>
+
+    <!-- المداخيل حسب الحلاق -->
+    <section class="glass-card">
+      <div class="panel-head"><h3><i class="fa-solid fa-sack-dollar"></i><span data-i18n="revenueByBarber"></span></h3></div>
+      <div id="revenueTable"></div>
+    </section>
+
+    <!-- الخدمات -->
+    <section class="glass-card">
+      <div class="panel-head"><h3><i class="fa-solid fa-tags"></i><span data-i18n="servicesTitle"></span></h3></div>
+      <form id="serviceForm" class="form-grid" novalidate>
+        <div><label for="sAr" data-i18n="svcNameAr"></label><input id="sAr" maxlength="40"></div>
+        <div><label for="sFr" data-i18n="svcNameFr"></label><input id="sFr" maxlength="40" dir="ltr"></div>
+        <div><label for="sPrice" data-i18n="price"></label><input id="sPrice" type="number" min="0" step="1"></div>
+        <div><label for="sDur" data-i18n="duration"></label><input id="sDur" type="number" min="5" step="5" value="30"></div>
+        <button class="btn" type="submit"><i class="fa-solid fa-plus"></i> <span data-i18n="addService"></span></button>
+      </form>
+      <div id="servicesTable"></div>
+    </section>
+
+    <!-- كل الحجوزات مع الفلاتر -->
+    <section class="glass-card">
+      <div class="panel-head"><h3><i class="fa-solid fa-clipboard-list"></i><span data-i18n="allBookings"></span></h3></div>
+      <div class="filters">
+        <div><label for="fDate" data-i18n="filterDate"></label><input type="date" id="fDate"></div>
+        <div><label for="fBarber" data-i18n="filterBarber"></label><select id="fBarber"></select></div>
+        <div><label for="fStatus" data-i18n="filterStatus"></label><select id="fStatus"></select></div>
+      </div>
+      <div id="allList"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="owner-dashboard.js"></script>
+</body>
+</html>
